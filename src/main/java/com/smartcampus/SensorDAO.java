@@ -9,12 +9,10 @@ import java.util.stream.Collectors;
 public class SensorDAO {
     private static Map<String, Sensor> sensors = new HashMap<>();
 
-    // We use a query parameter "type" to filter. If it's null, we return all of them.
     public List<Sensor> getAllSensors(String type) {
         if (type == null || type.trim().isEmpty()) {
             return new ArrayList<>(sensors.values());
         }
-        // Filter the list based on the requested type (e.g., only "CO2" sensors)
         return sensors.values().stream()
                 .filter(s -> s.getType().equalsIgnoreCase(type))
                 .collect(Collectors.toList());
@@ -29,8 +27,14 @@ public class SensorDAO {
         return sensor;
     }
     
-    // Helper method to check if a room has sensors (We will use this later for the DELETE room rule!)
     public boolean hasSensorsForRoom(String roomId) {
         return sensors.values().stream().anyMatch(s -> s.getRoomId().equals(roomId));
+    }
+
+    // NEW FOR PART 4: Get all sensors that belong to a specific room
+    public List<Sensor> getSensorsByRoom(String roomId) {
+        return sensors.values().stream()
+                .filter(s -> s.getRoomId().equals(roomId))
+                .collect(Collectors.toList());
     }
 }
