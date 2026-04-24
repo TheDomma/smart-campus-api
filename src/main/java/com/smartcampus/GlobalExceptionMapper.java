@@ -1,0 +1,14 @@
+package com.smartcampus;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
+
+@Provider
+public class GlobalExceptionMapper implements ExceptionMapper<Throwable> {
+    @Override
+    public Response toResponse(Throwable e) {
+        // Prevents Java Stack Traces from leaking to the client!
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                .entity("{\"error\":\"An unexpected internal server error occurred.\"}").build();
+    }
+}

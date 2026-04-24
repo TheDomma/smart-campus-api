@@ -51,9 +51,7 @@ public class RoomResource {
         
         // COURSEWORK RULE: Block deletion if sensors exist inside!
         if (sensorDAO.hasSensorsForRoom(roomId)) {
-            return Response.status(409) // 409 Conflict
-                    .entity("{\"error\":\"Cannot delete room. It still has sensors inside!\"}")
-                    .build();
+            throw new RoomNotEmptyException("Cannot delete room. It is currently occupied by active hardware.");
         }
         
         roomDAO.deleteRoom(roomId);

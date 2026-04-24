@@ -30,8 +30,8 @@ public class SensorReadingResource {
 
         // 2. THE COURSEWORK SIDE EFFECT: Update the parent sensor's currentValue!
         Sensor parentSensor = sensorDAO.getSensor(sensorId);
-        if (parentSensor != null) {
-            parentSensor.setCurrentValue(reading.getValue());
+        if (parentSensor != null && "MAINTENANCE".equalsIgnoreCase(parentSensor.getStatus())) {
+            throw new SensorUnavailableException("Sensor is disconnected for MAINTENANCE and cannot accept readings.");
         }
 
         return Response.status(Response.Status.CREATED).entity(newReading).build();

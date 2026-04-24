@@ -24,10 +24,7 @@ public class SensorResource {
     public Response addSensor(Sensor sensor) {
         // COURSEWORK CONSTRAINT: Verify the Room ID actually exists in our RoomDAO
         if (roomDAO.getRoom(sensor.getRoomId()) == null) {
-            // Return 422 Unprocessable Entity if the room is fake
-            return Response.status(422)
-                    .entity("{\"error\":\"Cannot create sensor. Room ID does not exist.\"}")
-                    .build();
+            throw new LinkedResourceNotFoundException("Cannot create sensor. Room ID does not exist.");
         }
         
         Sensor newSensor = sensorDAO.addSensor(sensor);
