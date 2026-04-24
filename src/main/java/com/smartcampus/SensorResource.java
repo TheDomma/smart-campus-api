@@ -33,4 +33,19 @@ public class SensorResource {
         Sensor newSensor = sensorDAO.addSensor(sensor);
         return Response.status(Response.Status.CREATED).entity(newSensor).build();
     }
+    
+    // PART 4: SUB-RESOURCE LOCATOR PATTERN
+    // Any request to /api/v1/sensors/{sensorId}/readings gets forwarded to SensorReadingResource
+    @Path("/{sensorId}/readings")
+    public Object getSensorReadingResource(@PathParam("sensorId") String sensorId) {
+        // If the sensor doesn't exist, block the routing immediately
+        if (sensorDAO.getSensor(sensorId) == null) {
+             return Response.status(Response.Status.NOT_FOUND)
+                     .entity("{\"error\":\"Sensor not found\"}")
+                     .build();
+        }
+        
+        // Hand off the request to the dedicated sub-resource class
+        return new SensorReadingResource(sensorId);
+    }
 }
