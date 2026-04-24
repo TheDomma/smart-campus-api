@@ -31,27 +31,24 @@ Follow these steps to deploy the API to a local environment:
 Here are five commands to test the core functionality of the API.
 
 **1. Get API Discovery Metadata (HATEOAS)**
-```bash
-curl -X GET http://localhost:8080/smart-campus-api-1.0-SNAPSHOT/api/v1/
+```
+curl -X GET http://localhost:8080/smart-campus-api-1.0-SNAPSHOT/api/v1/ ```
 
 **2. Create a new Room (POST)**
-```bash
+```
 curl -X POST http://localhost:8080/smart-campus-api-1.0-SNAPSHOT/api/v1/rooms \
 -H "Content-Type: application/json" \
--d '{"id": "R101", "name": "Lecture Theatre 1", "capacity": 150}'
+-d '{"id": "R101", "name": "Lecture Theatre 1", "capacity": 150}' 
 
 **3. Create a new Sensor with Cross-Resource Validation (POST)**
-```bash
 curl -X POST http://localhost:8080/smart-campus-api-1.0-SNAPSHOT/api/v1/sensors \
 -H "Content-Type: application/json" \
 -d '{"id": "S1", "roomId": "R101", "type": "CO2", "status": "ACTIVE", "currentValue": 0.0}'
 
 **4. Filter Sensors using Query Parameters (GET)**
-```bash
 curl -X GET "http://localhost:8080/smart-campus-api-1.0-SNAPSHOT/api/v1/sensors?type=CO2"
 
 **5. Append a Historical Reading via Sub-Resource Locator (POST)**
-```bash
 curl -X POST http://localhost:8080/smart-campus-api-1.0-SNAPSHOT/api/v1/sensors/S1/readings \
 -H "Content-Type: application/json" \
 -d '{"id": "RD-001", "timestamp": 1670000000, "value": 415.5}'
