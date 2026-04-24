@@ -4,6 +4,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import javax.ws.rs.core.Context;
 
 @Path("/rooms") 
 @Produces(MediaType.APPLICATION_JSON)
@@ -30,9 +31,14 @@ public class RoomResource {
     }
 
     @POST
-    public Response addRoom(Room room) {
+    public Response addRoom(Room room, @Context javax.ws.rs.core.UriInfo uriInfo) {
         Room newRoom = roomDAO.addRoom(room);
-        return Response.status(Response.Status.CREATED).entity(newRoom).build();
+        
+        // This generates the exact URL for the newly created room (e.g., /api/v1/rooms/R101)
+        java.net.URI location = uriInfo.getAbsolutePathBuilder().path(newRoom.getId()).build();
+        
+        // Return 201 Created, the Location header, AND the JSON body
+        return Response.created(location).entity(newRoom).build();
     }
 
     @DELETE
