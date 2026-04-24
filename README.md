@@ -31,7 +31,6 @@ Follow these steps to deploy the API to a local environment:
 Here are five commands to test the core functionality of the API.
 
 **1. Get API Discovery Metadata (HATEOAS)**
-```
 curl -X GET http://localhost:8080/smart-campus-api-1.0-SNAPSHOT/api/v1/
 
 **2. Create a new Room (POST)**
