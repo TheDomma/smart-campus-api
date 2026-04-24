@@ -17,7 +17,7 @@ public class DiscoveryResource {
         
         Map<String, Object> metadata = new HashMap<>();
         metadata.put("api_version", "1.0");
-        metadata.put("contact", "mudit@student.westminster.ac.uk"); 
+        metadata.put("contact", "muditha.20233064@iit.ac.lk");
         metadata.put("description", "Smart Campus API Discovery Endpoint");
         
         Map<String, String> links = new HashMap<>();
