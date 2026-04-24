@@ -1,11 +1,14 @@
 package com.smartcampus;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Room {
     private String id;
     private String name;
     private int capacity;
+    private List<String> sensorIds = new ArrayList<>(); // Added to match spec
 
-    // This empty constructor is MANDATORY for Jackson to convert JSON properly
     public Room() {
     }
 
@@ -15,7 +18,6 @@ public class Room {
         this.capacity = capacity;
     }
 
-    // Getters and Setters
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
@@ -24,4 +26,7 @@ public class Room {
 
     public int getCapacity() { return capacity; }
     public void setCapacity(int capacity) { this.capacity = capacity; }
+
+    public List<String> getSensorIds() { return sensorIds; }
+    public void setSensorIds(List<String> sensorIds) { this.sensorIds = sensorIds; }
 }
