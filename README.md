@@ -32,10 +32,9 @@ Here are five commands to test the core functionality of the API.
 
 **1. Get API Discovery Metadata (HATEOAS)**
 ```
-curl -X GET http://localhost:8080/smart-campus-api-1.0-SNAPSHOT/api/v1/ ```
+curl -X GET http://localhost:8080/smart-campus-api-1.0-SNAPSHOT/api/v1/
 
 **2. Create a new Room (POST)**
-```
 curl -X POST http://localhost:8080/smart-campus-api-1.0-SNAPSHOT/api/v1/rooms \
 -H "Content-Type: application/json" \
 -d '{"id": "R101", "name": "Lecture Theatre 1", "capacity": 150}' 
